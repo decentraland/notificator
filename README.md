@@ -1,45 +1,8 @@
 # Notificator server
 
-This is a simple server that implements the validation logic required for
-indexing a world into Places.
-
-# Consuming the API
-
-## Should index endpoint
-
-This endpoint is used to validate whether a world should be indexed in Places or
-not, according to the rules determined
-in [this governance proposal](https://governance.decentraland.org/proposal/?id=e712bb50-e822-11ed-b8f1-75dbe089d333).
-
-```http request
-POST https://notificator.decentraland.org/should-index
-Content-Type: application/json
-
-{ "dclNames": ["some-name.dcl.eth", "another-name.dcl.eth", "yet-another-name.dcl.eth"] }
-
-===
-
-HTTP/1.1 200 OK
-Date: Tue, 06 Jun 2023 15:13:11 GMT
-Content-Type: application/json
-
-{
-  "data": [
-    {
-      "dclName": "some-name.dcl.eth",
-      "shouldBeIndexed": true
-    },
-    {
-      "dclName": "another-name.dcl.eth",
-      "shouldBeIndexed": true
-    },
-    {
-      "dclName": "yet-another-name.dcl.eth",
-      "shouldBeIndexed": false
-    }
-  ]
-}
-```
+This is a simple server that implements monitors important events (such as 
+transactions in the blockchain, bids in the auction, etc) and generates 
+notifications for users.
 
 # Running the server
 
