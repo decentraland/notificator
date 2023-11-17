@@ -11,8 +11,8 @@
     "test:coverage": "jest --forceExit --detectOpenHandles --coverage --verbose"
   },
   "dependencies": {
-    "@dcl/catalyst-contracts": "^4.2.0",
-    "@dcl/schemas": "^9.7.0",
+    "@dcl/catalyst-contracts": "^4.3.1",
+    "@dcl/schemas": "^9.9.0",
     "@well-known-components/env-config-provider": "^1.2.0",
     "@well-known-components/http-server": "^2.0.0",
     "@well-known-components/interfaces": "^1.4.2",
@@ -24,8 +24,8 @@
   },
   "devDependencies": {
     "@dcl/eslint-config": "^1.1.12",
-    "@types/node": "^20.2.5",
-    "@well-known-components/test-helpers": "^1.5.3",
+    "@types/node": "^20.9.1",
+    "@well-known-components/test-helpers": "^1.5.4",
     "typescript": "^4.9.5"
   },
   "resolutions": {
