@@ -19,8 +19,10 @@ export type GlobalContext = {
 export type BaseComponents = {
   config: IConfigComponent
   logs: ILoggerComponent
+  fetch: IFetchComponent
   marketplaceSubGraph: ISubgraphComponent
   metrics: IMetricsComponent<keyof typeof theGraphMetricDeclarations>
+  pushNotifications: PushWrapper
   rentalsSubGraph: ISubgraphComponent
   server: IHttpServerComponent<GlobalContext>
   updateOwnerJob: IRunnable<void>
@@ -71,4 +73,8 @@ export type StatusResponse = {
 export type IRunnable<T> = {
   run(): Promise<T>
   start(): Promise<void>
+}
+
+export type PushWrapper = {
+  sendNotificationToChannel: (data: any, to: string[]) => Promise<void>
 }

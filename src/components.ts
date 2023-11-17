@@ -7,6 +7,7 @@ import { createSubgraphComponent } from '@well-known-components/thegraph-compone
 import { AppComponents, GlobalContext } from './types'
 import { metricDeclarations } from './metrics'
 import { createCheckUpdatesJob } from './logic/check-updates-job'
+import { createPushNotificationsComponent } from './adapters/push-notification'
 
 // Initialize all the components of the app
 export async function initComponents(): Promise<AppComponents> {
@@ -26,12 +27,15 @@ export async function initComponents(): Promise<AppComponents> {
   const rentalsSubGraph = await createSubgraphComponent({ config, logs, metrics, fetch }, rentalsSubGraphUrl)
 
   const updateOwnerJob = createCheckUpdatesJob({ logs, marketplaceSubGraph })
+  const pushNotifications = await createPushNotificationsComponent({ config, fetch, logs })
 
   return {
     config,
     logs,
+    fetch,
     marketplaceSubGraph,
     metrics,
+    pushNotifications,
     rentalsSubGraph,
     server,
     statusChecks,

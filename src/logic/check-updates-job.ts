@@ -18,9 +18,10 @@ type SalesResponse = {
 }
 
 export function createCheckUpdatesJob(
-  components: Pick<AppComponents, 'logs' | 'marketplaceSubGraph'>
+  components: Pick<AppComponents, 'logs' | 'marketplaceSubGraph' | 'pushNotifications'>
 ): IRunnable<void> {
-  const logger = components.logs.getLogger('check-updates-job')
+  const { logs, pushNotifications } = components
+  const logger = logs.getLogger('check-updates-job')
 
   let startDate = new Date()
 
@@ -53,7 +54,8 @@ export function createCheckUpdatesJob(
       since: Math.floor(startDate.getTime() / 1000) - 86400 * 3
     })
     // console.log('updates', updates)
-    updates.sales.forEach((sale) => {
+    for (const sale of updates.sales) {
+      await pushNotifications.sendNotificationToChannel(sale, [sale.seller])
       console.info({
         image: sale.nft.image,
         title: 'Item Sold',
@@ -62,7 +64,7 @@ export function createCheckUpdatesJob(
         buyer: sale.buyer,
         seller: sale.seller
       })
-    })
+    }
     startDate = now
   }
 
